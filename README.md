@@ -38,7 +38,3 @@ Then open [http://localhost:3000](http://localhost:3000).
 - GitHub: [@Moxsahil](https://github.com/Moxsahil)
 - LinkedIn: [sahil-barak](https://www.linkedin.com/in/sahil-barak/)
 - Email: sahilmk01@gmail.com
-
-## Credits
-
-This site is built on [Swami Malode's portfolio](https://github.com/swamimalode07/swamii.me), used under the MIT License. See [LICENSE](LICENSE).
