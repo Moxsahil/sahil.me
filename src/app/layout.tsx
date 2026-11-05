@@ -4,7 +4,15 @@ import { Analytics } from "@vercel/analytics/next";
 import { Space_Grotesk } from "next/font/google";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Syne } from "next/font/google";
-import { GeistPixelSquare, GeistPixelGrid, GeistPixelCircle, GeistPixelTriangle, GeistPixelLine } from 'geist/font/pixel';
+import {
+  GeistPixelSquare,
+  GeistPixelGrid,
+  GeistPixelCircle,
+  GeistPixelTriangle,
+  GeistPixelLine,
+} from "geist/font/pixel";
+import { SITE_NAME, SITE_TITLE, SITE_URL, createMetadata } from "@/lib/site";
+import { structuredData } from "@/lib/structured-data";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -30,18 +38,18 @@ const syne = Syne({
   display: "swap",
 });
 
-// the live address of this site; every absolute URL below is built from it
-const SITE_URL = "https://sahil-barak.vercel.app";
-const DESCRIPTION =
-  "Sahil Barak is a Software Engineer building CanvasFlow and Mox UI with Next.js, React and TypeScript.";
+const googleVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
 
 export const metadata: Metadata = {
+  ...createMetadata({}),
   metadataBase: new URL(SITE_URL),
-  title: "Sahil Barak - Software Engineer",
-  description: DESCRIPTION,
-  icons: {
-    icon: "/official/logo.png",
+  title: {
+    default: SITE_TITLE,
+    template: `%s | ${SITE_NAME}`,
   },
+  applicationName: SITE_NAME,
+  authors: [{ name: SITE_NAME, url: SITE_URL }],
+  creator: SITE_NAME,
   keywords: [
     "Sahil Barak",
     "Software Engineer",
@@ -52,62 +60,41 @@ export const metadata: Metadata = {
     "CanvasFlow",
     "Mox UI",
   ],
-  openGraph: {
-    title: "Sahil Barak - Software Engineer",
-    description: DESCRIPTION,
-    url: SITE_URL,
-    siteName: "Sahil Barak",
-    images: [
-      {
-        url: "/official/og.png",
-        width: 2400,
-        height: 1260,
-        alt: "Sahil Barak, Software Engineer",
-      },
-    ],
-    locale: "en_US",
-    type: "website",
+  icons: { icon: "/official/logo.png", apple: "/official/logo.png" },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "Sahil Barak - Software Engineer",
-    description: DESCRIPTION,
-    images: ["/official/og.png"],
-  },
+  ...(googleVerification && { verification: { google: googleVerification } }),
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
       <head>
-        <link rel="canonical" href={SITE_URL} />
-
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Person",
-              name: "Sahil Barak",
-              url: SITE_URL,
-              sameAs: [
-                "https://github.com/Moxsahil",
-                "https://www.linkedin.com/in/sahil-barak/",
-                "https://www.instagram.com/moksshhh_.20/",
-              ],
-              jobTitle: "Software Engineer",
-              image: `${SITE_URL}/official/og.png`,
-            }),
+            __html: JSON.stringify(structuredData),
           }}
         />
       </head>
 
-      <link rel="icon" href="/logo.ico" />
-
-      <body className={` ${geistSans.variable} ${geistMono.variable} ${GeistPixelSquare.variable} ${spaceGrotesk.variable} ${syne.variable} antialiased`}>
-        <TooltipProvider>
-          {children}
-        </TooltipProvider>
+      <body
+        className={` ${geistSans.variable} ${geistMono.variable} ${GeistPixelSquare.variable} ${spaceGrotesk.variable} ${syne.variable} antialiased`}
+      >
+        <TooltipProvider>{children}</TooltipProvider>
         <Analytics />
         {/* <CustomCursor /> */}
       </body>

@@ -63,7 +63,7 @@ const HeroSection = () => {
             </div>
 
             <div className="mt-6 flex flex-wrap gap-3 sm:mt-6 md:mt-8 md:gap-6">
-              {/* <a href="/projectspage" target="_blank" rel="noopener noreferrer">
+              {/* <a href="/projects" target="_blank" rel="noopener noreferrer">
                 <RingButton text="View my Work" icon={FileDown} />
               </a> */}
               <a

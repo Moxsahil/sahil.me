@@ -26,7 +26,7 @@ const ProjectsSection = () => {
         ))}
       </div>
       <div className="px-[4%] flex justify-center pb-6">
-        <Link href="/projectspage">
+        <Link href="/projects">
           <RingButton text="View All Projects" size="lg"/>
         </Link>
       </div>

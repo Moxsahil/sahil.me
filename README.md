@@ -4,7 +4,7 @@ My personal site: who I am, what I'm building, and the components I've made.
 
 ![Sahil Barak, Software Engineer](public/official/og.png)
 
-**Live:** [sahil-barak.vercel.app](https://sahil-barak.vercel.app)
+**Live:** [sahilbarak.com](https://sahilbarak.com)
 
 ## What's on it
 

@@ -72,7 +72,7 @@ const Navbar: React.FC = () => {
             <div className="hidden items-center gap-6 md:flex lg:gap-6">
               <button
                 className="font-sans font-medium text-white/60 transition-colors hover:text-white"
-                onClick={() => router.push("/projectspage")}
+                onClick={() => router.push("/projects")}
               >
                 Projects
               </button>
@@ -138,7 +138,7 @@ const Navbar: React.FC = () => {
             <div className="space-y-1 pt-3">
               <button
                 className="block w-full rounded-lg px-3 py-3 text-left font-sans font-medium text-white transition-colors hover:bg-[#1C1C1F] hover:text-gray-300"
-                onClick={() => router.push("/projectspage")}
+                onClick={() => router.push("/projects")}
               >
                 Projects
               </button>
