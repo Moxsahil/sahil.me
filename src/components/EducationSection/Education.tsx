@@ -6,16 +6,37 @@ type EducationItem = {
   qualification: string;
   duration: string;
   score: string;
-  logo: string;
+  scoreLabel: string;
+  logo?: string;
+  badge?: string;
 };
 
 const education: EducationItem[] = [
+  {
+    institution: "DCRUST",
+    location: "Murthal, Sonipat, Haryana",
+    qualification: "M.Tech",
+    duration: "2026",
+    score: "8.3",
+    scoreLabel: "CGPA",
+    logo: "/education/dcrust.jpg",
+  },
+  {
+    institution: "GATE",
+    location: "Graduate Aptitude Test in Engineering",
+    qualification: "Computer Science",
+    duration: "2024",
+    score: "1291",
+    scoreLabel: "AIR",
+    logo: "/education/gate.png",
+  },
   {
     institution: "PDM University",
     location: "Bahadurgarh, Haryana",
     qualification: "B.Tech",
     duration: "2023",
     score: "7.31",
+    scoreLabel: "CGPA",
     logo: "/education/pdm.png",
   },
   {
@@ -24,6 +45,7 @@ const education: EducationItem[] = [
     qualification: "Class 12th",
     duration: "2019",
     score: "7.0",
+    scoreLabel: "CGPA",
     logo: "/education/dav.png",
   },
   {
@@ -32,6 +54,7 @@ const education: EducationItem[] = [
     qualification: "Class 10th",
     duration: "2017",
     score: "8.6",
+    scoreLabel: "CGPA",
     logo: "/education/dav.png",
   },
 ];
@@ -48,7 +71,7 @@ const EducationSection = () => {
 
         {education.map((item, index) => (
           <li
-            key={item.qualification}
+            key={`${item.qualification}-${item.duration}`}
             className="relative grid grid-cols-[12px_minmax(0,1fr)] gap-x-4 md:grid-cols-[124px_48px_minmax(0,1fr)] md:gap-x-0"
           >
             <span className="text-secondary col-start-2 row-start-1 pb-2 font-mono text-xs tabular-nums md:col-start-1 md:pt-[22px] md:pb-0 md:text-right md:text-sm">
@@ -68,13 +91,22 @@ const EducationSection = () => {
               <div className="flex min-w-0 items-center gap-3 md:gap-4">
                 <div className="relative h-10 w-10 shrink-0 md:h-12 md:w-12">
                   <span className="absolute -inset-[2px] rounded-[14px] border border-white/20" />
-                  <div className="relative flex h-full w-full items-center justify-center overflow-hidden rounded-[12px] border border-white/10 bg-white p-1">
-                    <img
-                      src={item.logo}
-                      alt={item.institution}
-                      className="h-full w-full object-contain"
-                    />
-                  </div>
+                  {item.logo ? (
+                    <div className="relative flex h-full w-full items-center justify-center overflow-hidden rounded-[12px] border border-white/10 bg-white p-1">
+                      <img
+                        src={item.logo}
+                        alt={item.institution}
+                        className="h-full w-full object-contain"
+                      />
+                    </div>
+                  ) : (
+                    <div
+                      aria-hidden="true"
+                      className="font-space-grotesk relative flex h-full w-full items-center justify-center rounded-[12px] border border-white/10 bg-white/[0.04] text-lg font-semibold text-white md:text-xl"
+                    >
+                      {item.badge ?? item.institution.charAt(0)}
+                    </div>
+                  )}
                 </div>
 
                 <div className="flex min-w-0 flex-col justify-center">
@@ -95,7 +127,7 @@ const EducationSection = () => {
                   {item.score}
                 </div>
                 <div className="text-secondary/70 font-mono text-[10px] tracking-wider uppercase md:text-xs">
-                  CGPA
+                  {item.scoreLabel}
                 </div>
               </div>
             </div>
